@@ -41,4 +41,4 @@ if __name__ == '__main__':
         print(f'Loaded "{extension}"')
 
 client = MyClient()
-client.run("NTc3NDg2ODEzODM3MzkzOTIy.XNlwgQ.YlKo_8rA0egErRvj_Sh5udQzeOw")
+client.run("")

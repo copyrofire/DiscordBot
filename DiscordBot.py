@@ -21,6 +21,13 @@ class MyClient(Bot):
             await channel.send(" Changed message: " + before.content + " --to--> " + after.content)
         else:
             return
+        
+    async def on_reaction_add(self, reaction, user):
+        member = discord.utils.get(user.guild.roles, name="Yordle City")
+        if str(reaction.emoji) == "✔":
+            await user.add_roles(member)
+        else:
+            print("Something went wrong while assigning role to user :c")
 
 
 if __name__ == '__main__':

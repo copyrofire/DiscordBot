@@ -22,12 +22,27 @@ class MyClient(Bot):
         else:
             return
         
-    async def on_reaction_add(self, reaction, user):
-        member = discord.utils.get(user.guild.roles, name="Yordle City")
-        if str(reaction.emoji) == "✔":
-            await user.add_roles(member)
-        else:
-            print("Something went wrong while assigning role to user :c")
+    async def on_raw_reaction_add(payload):
+        message_id = payload.message_id
+        if message_id == 554283977729507358:
+            guild_id = payload.guild_id
+            guild = discord.utils.find(lambda g: g.id == guild_id, client.guilds)
+
+            if payload.emoji.name == "check":
+                role = discord.utils.get(guild.roles, name="Yordle City")
+            else:
+                role = discord.utils.get(guild.roles, name=ayload.emoji.name)
+
+            if role is not None:
+                member = discord.utils.find(lambda m : m.id == payload.user.id, guild.members)
+                if member is not None:
+                    await member.add_roles(role)
+                    print("done")
+                else:
+                    print("Member not found")
+            else:
+                print("Role not found")
+
 
 
 if __name__ == '__main__':

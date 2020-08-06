@@ -13,16 +13,40 @@ class MyClient(Bot):
 
     async def on_message_delete(self, message):
         channel = client.get_channel(737219743143952404)
-        await channel.send(str(message.author) + " deleted message: " + message.content)
+        if not message.author.bot:
+                embed = Embed(title="Message DELETED",
+                              description=f"Deleted by {message.author.display_name}",
+                              colour=message.author.colour,
+                              timestamp=datetime.utcnow())
+
+                fields = [("Content", message.content, False)]
+
+                for name, value, inline in fields:
+                    embed.add_field(name=name, value=value, inline=inline)
+
+                await channel.send(embed=embed)
 
     async def on_message_edit(self, before, after):
         channel = client.get_channel(737219743143952404)
-        if before.content != after.content:
-            await channel.send(" Changed message: " + before.content + " --to--> " + after.content)
+        if not after.author.bot:
+            if before.content != after.content:
+                embed = Embed(title="Message EDIT",
+                              description=f"Edited by {after.author.display_name}",
+                              colour=after.author.colour,
+                              timestamp=datetime.utcnow())
+
+                fields = [("Before", before.content, False),
+                          ("After", after.content, False)]
+
+                for name, value, inline in fields:
+                    embed.add_field(name=name, value=value, inline=inline)
+
+                await channel.send(embed=embed)
         else:
             return
         
-    async def on_raw_reaction_add(payload):
+        
+    async def on_reaction_add(payload):
         message_id = payload.message_id
         if message_id == 554283977729507358:
             guild_id = payload.guild_id

@@ -27,6 +27,24 @@ class Commands(commands.Cog):
             if msg.author == message.author:
                 counter += 1
         await message.edit(mesg, '{} has {} messages in {}.'.format(message.author, str(counter), message.channel))
+        
+    @commands.command()
+    async def messages(self, ctx):
+        mesg = await ctx.send('Calculating...')
+        counter = 0
+        async for msg in cached_messages(message.channel, limit=9999999):
+            if msg.author == message.author:
+                counter += 1
+        await message.edit(mesg, '{} has {} messages in {}.'.format(message.author, str(counter), message.channel))
+
+    @commands.command()
+    @commands.has_role('Yordle Commaders')
+    async def purge(self, ctx, amount=15):
+        await ctx.channel.purge(limit=amount+1)
+
+        channel = self.bot.get_channel(737219743143952404)
+        embed = Embed(title=f"{ctx.author.name} purged: {ctx.channel.name}", description=f"{amount} messages were cleared")
+        await channel.send(embed=embed)
 
 
 def setup(bot):

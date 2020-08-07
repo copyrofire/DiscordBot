@@ -14,6 +14,8 @@ class Levels(commands.Cog, name='Levels'):
 
         with open(r"C:\Users\Administrator\Source\Repos\DiscordBot\DiscordBot\exp.json", "r") as f:
             self.users = json.load(f)
+           
+        self.bot.loop.create_task(self.save_users())
 
     async def save_users(self):
         await self.bot.wait_until_ready()

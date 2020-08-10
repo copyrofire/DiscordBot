@@ -34,12 +34,13 @@ class Levels(commands.Cog, name='Levels'):
             return  True
         else:
             return  False
-
+        
+    @commands.Cog.listener()
     async def on_message(self, message):
         if message.author == self.bot.user:
             return
 
-        author_id = str(discord.message.author.id)
+        author_id = str(message.author.id)
 
         if not author_id in self.users:
             self.users[author_id] = {}
@@ -49,7 +50,7 @@ class Levels(commands.Cog, name='Levels'):
         self.users[author_id]['exp'] += 2
 
         if self.lvl_up(author_id):
-            await discord.message.channel.send(f"{discord.message.author.mention} is now level {self.users[author_id]['level']}")
+            await message.channel.send(f"{message.author.mention} is now level {self.users[author_id]['level']}")
 
     @commands.command()
     async def level(self, ctx, member: discord.Member = None):

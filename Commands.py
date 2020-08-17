@@ -28,14 +28,11 @@ class Commands(commands.Cog):
                 counter += 1
         await message.edit(mesg, '{} has {} messages in {}.'.format(message.author, str(counter), message.channel))
         
-    @commands.command()
+    @commands.command(description="Has a major Bug! MonkaS")
     async def messages(self, ctx):
-        mesg = await ctx.send('Calculating...')
-        counter = 0
-        async for msg in cached_messages(message.channel, limit=9999999):
-            if msg.author == message.author:
-                counter += 1
-        await message.edit(mesg, '{} has {} messages in {}.'.format(message.author, str(counter), message.channel))
+        message = await ctx.send('Calculating...')
+        await asyncio.sleep(5)
+        await message.edit(content='YOU FOOL YOU THOUGHT I WOULD GIVE YOU THE NUMBER OF MESSAGES NOW! BUT I WONT HAHA!')
 
     @commands.command()
     @commands.has_role('Yordle Commaders')
@@ -45,6 +42,31 @@ class Commands(commands.Cog):
         channel = self.bot.get_channel(737219743143952404)
         embed = Embed(title=f"{ctx.author.name} purged: {ctx.channel.name}", description=f"{amount} messages were cleared")
         await channel.send(embed=embed)
+        
+    #@commands.command(pass_context = True)
+    #async def mute(ctx, member: discord.Member):
+        #if ctx.message.author.server_permissions.administrator or ctx.message.author.id == '194151340090327041':
+            #role = discord.utils.get(member.server.roles, name='Muted')
+            #await bot.add_roles(member, role)
+            #embed=discord.Embed(title="User Muted!", description="**{0}** was muted by **{1}**!".format(member, ctx.message.author), color=0xff00f6)
+            #await bot.say(embed=embed)
+        #else:
+            #embed=discord.Embed(title="Permission Denied.", description="You don't have permission to use this command.", color=0xff00f6)
+            #await bot.say(embed=embed)
+
+    @commands.command(pass_context=True)
+    async def sjoin(self, ctx, Member = None):
+        if Member is None:
+            Member = ctx.message.author
+
+        await ctx.send('{0} joined this server at {0.joined_at}'.format(Member))
+
+    @commands.command(pass_context=True)
+    async def djoin(self, ctx, Member = None):
+        if Member is None:
+            Member = ctx.message.author
+
+        await ctx.send('{0} created the discord account at {0.created_at}'.format(Member))
 
 
 def setup(bot):

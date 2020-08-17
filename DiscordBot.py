@@ -72,4 +72,6 @@ class MyClient(Bot):
 if __name__ == '__main__':
     client = MyClient(command_prefix=".")
     client.load_extension("Commands")
+    client.load_extension("Levels")
+    client.load_extension("Activities")
     client.run("")

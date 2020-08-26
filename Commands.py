@@ -67,6 +67,41 @@ class Commands(commands.Cog):
             Member = ctx.message.author
 
         await ctx.send('{0} created the discord account at {0.created_at}'.format(Member))
+        
+    
+    @commands.command(pass_context = True)
+    @commands.has_permissions(manage_roles=True, ban_members=True)
+    async def warn(ctx, user, *, reason:str):
+        with open('reports.json', encoding='utf-8') as f:
+            try:
+                report = json.load(f)
+            except ValueError:
+                report = {}
+                report['users'] = []
+        if not reason:
+            await ctx.send("Please provide a reason")
+        #return #below code won't be executed
+        reason = ' '.join(reason)
+        for current_user in report['users']:
+            if current_user['name'] == user.name:
+                current_user['reasons'].append(reason)
+            break
+        else:
+            report['users'].append({
+            'name':user,
+            'reasons': [reason,]
+            })
+        with open('reports.json','w+') as f:
+            json.dump(report,f)
+
+    @commands.command(pass_context = True)
+    async def warnings(ctx,user:discord.User):
+        for current_user in report['users']:
+            if user.name == current_user['name']:
+                await client.say(f"{user.name} has been reported {len(current_user['reasons'])} times : {','.join(current_user['reasons'])}")
+            break
+        else:
+            await client.say(f"{user.name} has never been reported")  
 
 
 def setup(bot):

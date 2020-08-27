@@ -116,6 +116,42 @@ class Commands(commands.Cog):
             await ctx.send("Okay +1 warning for you, for trying to use a command u are not allowed to use!") 
 
 
+    @commands.command(pass_context=True)
+    async def uptime(self, ctx):
+        current_time = time.time()
+        difference = int(round(current_time - start_time))
+        text = str(datetime.timedelta(seconds=difference))
+        embed = discord.Embed(colour=ctx.message.author.top_role.colour)
+        embed.add_field(name="Uptime", value=text)
+        embed.set_footer(text="Now you can stalk me in real time!")
+        try:
+            await ctx.send(embed=embed)
+        except discord.HTTPException:
+            await ctx.send("Current uptime: " + text)                           
+                         
+                               
+    @commands.command(pass_context=True)
+    async def help(self, ctx):
+
+        embed = discord.Embed(color = discord.Colour.orange())
+
+        embed.set_author(name='Commands')
+        embed.add_field(name='ping', value='Prob over 100ms, but who cares xD', inline=False)
+        embed.add_field(name='uptime', value='Shows how long Snowflake has been up and running', inline=False)
+        embed.add_field(name='messages', value='Find out :P', inline=False)
+        embed.add_field(name='djoin', value='Shows when you joined Discord', inline=False)
+        embed.add_field(name='sjoin', value='Shows when you joined this Discord Server', inline=False)
+        embed.add_field(name='level', value='Shows what level and how much exp you have.', inline=False)
+        embed.add_field(name='rank', value='[WIP]Leaderboard', inline=False)
+        embed.add_field(name='remind', value='[WIP]can remind you about sth.', inline=False)
+        embed.add_field(name='purge', value='Deletes 25 messages! (Only usable for mods!)', inline=False)
+        embed.add_field(name='warn', value='Warn a user! [example: .warn @copyrofire test] (Only usable for mods!)', inline=False)
+        embed.add_field(name='mute', value='[WIP]mutes a User. Denied to use Voice chat! (Only usable for mods!)', inline=False)
+        if ctx.channel.name == ("bots"):
+            await ctx.send(embed=embed)
+        else:
+            await ctx.send("Wrong channel, go to #bots or go to jail u rulebreaker!")                           
+                               
 def setup(bot):
     bot.add_cog(Commands(bot))
 

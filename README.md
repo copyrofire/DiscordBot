@@ -1,8 +1,7 @@
 # DiscordBot
-A simple Discord bot that can be used either as a basic Idea to continue and develop it to your liking, or just use it and self host it in your Discord-server!
+A simple Discord bot that can be online in just 2minutees!
+Can be used to continue and develop it to your liking!
 
 # Requirements
 All that is needed, is your own Discord Token and Python installed on your PC or Server!
-
-# Version
-Uses Python Version 3.8.10
+You would need to edit the files to fill out your Tokens and IDs and then your got to go!

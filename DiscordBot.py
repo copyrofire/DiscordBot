@@ -74,4 +74,4 @@ if __name__ == '__main__':
     client.load_extension("Commands")
     client.load_extension("Levels")
     client.load_extension("Activities")
-    client.run("")
+    client.run("YOUR_BOT_TOKEN_HERE")

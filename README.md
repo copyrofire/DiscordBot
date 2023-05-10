@@ -1,5 +1,5 @@
 # DiscordBot
-A simple Discord bot that can be online in just 2minutees!
+A simple Discord bot that can be online in just 2 minutes!
 Can be used to continue and develop it to your liking!
 
 # Requirements

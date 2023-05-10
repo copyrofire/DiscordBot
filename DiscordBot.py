@@ -5,14 +5,14 @@ from discord.ext.commands import Bot
 class MyClient(Bot):
     #Log in
     async def on_ready(self):
-        await client.change_presence(status=discord.Status.idle, activity=discord.Game("Version 0.0.3"))
-        print("I am ready senpai")
+        await client.change_presence(status=discord.Status.idle, activity=discord.Game("Version 1.0"))
+        print("I am ready!")
 
     async def on_typing(self, channel , user, when):
         print(str(user) + " is typing in: " + str(channel) + str(when))
 
     async def on_message_delete(self, message):
-        channel = client.get_channel(737219743143952404)
+        channel = client.get_channel(YOUR_CHANNEL_ID_HERE)
         if not message.author.bot:
                 embed = Embed(title="Message DELETED",
                               description=f"Deleted by {message.author.display_name}",
@@ -27,7 +27,7 @@ class MyClient(Bot):
                 await channel.send(embed=embed)
 
     async def on_message_edit(self, before, after):
-        channel = client.get_channel(737219743143952404)
+        channel = client.get_channel(YOUR_CHANNEL_ID_HERE)
         if not after.author.bot:
             if before.content != after.content:
                 embed = Embed(title="Message EDIT",
@@ -48,7 +48,7 @@ class MyClient(Bot):
         
     async def on_reaction_add(payload):
         message_id = payload.message_id
-        if message_id == 554283977729507358:
+        if message_id == YOUR_MESSAGE_ID_HERE:
             guild_id = payload.guild_id
             guild = discord.utils.find(lambda g: g.id == guild_id, client.guilds)
 

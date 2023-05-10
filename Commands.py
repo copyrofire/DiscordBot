@@ -28,31 +28,16 @@ class Commands(commands.Cog):
                 counter += 1
         await message.edit(mesg, '{} has {} messages in {}.'.format(message.author, str(counter), message.channel))
         
-    @commands.command(description="Has a major Bug! MonkaS")
-    async def messages(self, ctx):
-        message = await ctx.send('Calculating...')
-        await asyncio.sleep(5)
-        await message.edit(content='YOU FOOL YOU THOUGHT I WOULD GIVE YOU THE NUMBER OF MESSAGES NOW! BUT I WONT HAHA!')
 
     @commands.command()
-    @commands.has_role('Yordle Commaders')
+    @commands.has_role('DISCORD_ROLE_HERE')
     async def purge(self, ctx, amount=15):
         await ctx.channel.purge(limit=amount+1)
 
-        channel = self.bot.get_channel(737219743143952404)
+        channel = self.bot.get_channel(CHANNEL_ID_HERE)
         embed = Embed(title=f"{ctx.author.name} purged: {ctx.channel.name}", description=f"{amount} messages were cleared")
         await channel.send(embed=embed)
         
-    #@commands.command(pass_context = True)
-    #async def mute(ctx, member: discord.Member):
-        #if ctx.message.author.server_permissions.administrator or ctx.message.author.id == '194151340090327041':
-            #role = discord.utils.get(member.server.roles, name='Muted')
-            #await bot.add_roles(member, role)
-            #embed=discord.Embed(title="User Muted!", description="**{0}** was muted by **{1}**!".format(member, ctx.message.author), color=0xff00f6)
-            #await bot.say(embed=embed)
-        #else:
-            #embed=discord.Embed(title="Permission Denied.", description="You don't have permission to use this command.", color=0xff00f6)
-            #await bot.say(embed=embed)
 
     @commands.command(pass_context=True)
     async def sjoin(self, ctx, Member = None):
@@ -89,17 +74,14 @@ class Commands(commands.Cog):
         embed = discord.Embed(color = discord.Colour.orange())
 
         embed.set_author(name='Commands')
-        embed.add_field(name='ping', value='Prob over 100ms, but who cares xD', inline=False)
-        embed.add_field(name='uptime', value='Shows how long Snowflake has been up and running', inline=False)
-        embed.add_field(name='messages', value='Find out :P', inline=False)
+        embed.add_field(name='ping', value='How quickly I respond', inline=False)
+        embed.add_field(name='uptime', value='Shows how long the Bot has been up and running', inline=False)
+        embed.add_field(name='messages', value='Shows messages', inline=False)
         embed.add_field(name='djoin', value='Shows when you joined Discord', inline=False)
         embed.add_field(name='sjoin', value='Shows when you joined this Discord Server', inline=False)
         embed.add_field(name='level', value='Shows what level and how much exp you have.', inline=False)
-        embed.add_field(name='rank', value='[WIP]Leaderboard', inline=False)
-        embed.add_field(name='remind', value='[WIP]can remind you about sth.', inline=False)
         embed.add_field(name='purge', value='Deletes 25 messages! (Only usable for mods!)', inline=False)
         embed.add_field(name='warn', value='Warn a user! [example: .warn @copyrofire test] (Only usable for mods!)', inline=False)
-        embed.add_field(name='mute', value='[WIP]mutes a User. Denied to use Voice chat! (Only usable for mods!)', inline=False)
         if ctx.channel.name == ("bots"):
             await ctx.send(embed=embed)
         else:
